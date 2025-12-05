@@ -1,0 +1,86 @@
+CS 3354 – ToDo List Project Design Document
+
+1. Project Description
+This project implements a simple ToDo List application using Java, Swing, and Gradle. 
+Users can create tasks, update them, mark them as completed, delete them, and view task lists. 
+The application saves and loads task data using a text file ("tasks.txt").
+
+The project follows requirements from the CS 3354 project list:
+- GUI built with Swing
+- Data stored in a text file
+- Uses Java Collections (ArrayList)
+- Structured as a Gradle project
+
+2. CRC Cards
+
+--- Task ---
+Responsibilities:
+- Store task ID, description, and completion status
+- Provide accessors/mutators
+Collaborators:
+- TaskManager
+
+--- TaskManager ---
+Responsibilities:
+- Manage all Task objects
+- Add, update, delete, complete tasks
+- Load/save tasks to file
+Collaborators:
+- Task
+- ToDoGUI
+
+--- ToDoGUI ---
+Responsibilities:
+- Provide Swing interface
+- Collect user input
+- Trigger TaskManager operations
+Collaborators:
+- TaskManager
+
+3. UML Diagrams (Text Version)
+
+Task
+------------------------
+- id: int
+- description: String
+- completed: boolean
++ getId()
++ getDescription()
++ isCompleted()
++ setDescription()
++ setCompleted()
+
+TaskManager
+------------------------
+- tasks: List<Task>
+- nextId: int
+- FILE_NAME: String
++ addTask()
++ updateTask()
++ markCompleted()
++ deleteTask()
++ getAllTasks()
++ getCompletedTasks()
++ saveToFile()
++ loadFromFile()
+
+ToDoGUI
+------------------------
+- manager: TaskManager
+- displayArea: JTextArea
+- inputField: JTextField
+- idField: JTextField
++ refresh()
++ main()
+
+Relationships:
+ToDoGUI → uses → TaskManager  
+TaskManager → contains many → Task  
+
+4. Business Rules
+- Every task has a unique integer ID
+- Task descriptions must be non-empty
+- Completed tasks remain in the list
+- Data is saved after every modification
+
+End of Design Document
